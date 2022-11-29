@@ -3,7 +3,7 @@ import axios from 'axios';
 
 //const { VITE_API_URL } = getEnvVariables();
 
-const BASE_URL = 'https://dataplushn.com';
+const BASE_URL = 'https://api.dataplushn.com';
 
 export default axios.create({
     baseURL: BASE_URL, //'https://poswebbackend-dataplus.up.railway.app/api/',
