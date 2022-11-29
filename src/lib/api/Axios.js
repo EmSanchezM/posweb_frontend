@@ -6,12 +6,15 @@ const { VITE_API_URL } = getEnvVariables();
 const BASE_URL = VITE_API_URL;
 
 export default axios.create({
-	baseURL: BASE_URL, //'https://poswebbackend-dataplus.up.railway.app/api/',
-	headers: { 'Content-Type': 'application/json' }
+    baseURL: BASE_URL, //'https://poswebbackend-dataplus.up.railway.app/api/',
+    headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': true
+    }
 });
 
 export const axiosPrivate = axios.create({
-	baseURL: BASE_URL,//'https://poswebbackend-dataplus.up.railway.app/api/',
-	headers: { 'Content-Type': 'application/json' },
-	withCredentials: true
+    baseURL: BASE_URL, //'https://poswebbackend-dataplus.up.railway.app/api/',
+    headers: { 'Content-Type': 'application/json' },
+    withCredentials: true
 });
