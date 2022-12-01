@@ -3,7 +3,7 @@ import axios from 'axios';
 
 //const { VITE_API_URL } = getEnvVariables();
 
-const BASE_URL = 'https://api.dataplushn.com:1337/api';
+const BASE_URL = 'https://api.dataplushn.com/api';
 //const BASE_URL = 'http://localhost:1337/api';
 
 export default axios.create({
