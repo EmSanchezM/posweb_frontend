@@ -10,7 +10,8 @@ export default axios.create({
     baseURL: BASE_URL, //'https://poswebbackend-dataplus.up.railway.app/api/',
     headers: {
         'Content-Type': 'application/json'
-    }
+    },
+    withCredentials: '*'
 });
 
 export const axiosPrivate = axios.create({
