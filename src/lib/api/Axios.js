@@ -9,8 +9,7 @@ const BASE_URL = 'https://api.dataplushn.com/api';
 export default axios.create({
     baseURL: BASE_URL, //'https://poswebbackend-dataplus.up.railway.app/api/',
     headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': true
+        'Content-Type': 'application/json'
     }
 });
 
