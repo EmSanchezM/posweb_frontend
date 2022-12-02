@@ -10,13 +10,18 @@ export default axios.create({
     baseURL: BASE_URL, //'https://poswebbackend-dataplus.up.railway.app/api/',
     headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE'
     },
     withCredentials: '*'
 });
 
 export const axiosPrivate = axios.create({
     baseURL: BASE_URL, //'https://poswebbackend-dataplus.up.railway.app/api/',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE'
+    },
     withCredentials: '*'
 });
