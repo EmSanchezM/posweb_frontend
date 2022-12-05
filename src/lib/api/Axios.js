@@ -3,9 +3,9 @@ import axios from 'axios';
 
 //const { VITE_API_URL } = getEnvVariables();
 
-const BASE_URL = 'https://api.dataplushn.com/api';
+//const BASE_URL = 'https://api.dataplushn.com/api';
 //const BASE_URL = 'http://back.dataplushn.com/api';
-//const BASE_URL = 'https://poswebbackend-production.up.railway.app/api';
+const BASE_URL = 'https://poswebbackend-production.up.railway.app/api';
 //const BASE_URL = 'http://localhost:1338/api';
 
 export default axios.create({
