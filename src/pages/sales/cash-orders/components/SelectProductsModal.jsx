@@ -2,30 +2,31 @@ import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
 import { Dialog } from 'primereact/dialog';
 
-import useProducts from '../../../../lib/hooks/product/useProducts';
+import useCartProducts from '../../../../lib/hooks/product/useCartProducts';
+
 import FooterSelectProducts from './FooterSelectProducts';
 import HeaderSelectProducts from './HeaderSelectProducts';
 
 const SelectProductsModal = ({
-	modalProducts,
+	visibleModalProducts,
 	handleHideModalProducts,
 	selectedProducts,
-	setSelectedProducts,
+	handleAddSelectedProducts,
 	globalFilter,
 	setGlobalFilter
 }) => {
-	const { products } = useProducts();
+	const { products } = useCartProducts();
 
 	return (
 		<Dialog
 			header='Selecciona tus productos'
-			visible={modalProducts}
+			visible={visibleModalProducts}
 			footer={
 				<FooterSelectProducts
 					handleHideModalProducts={handleHideModalProducts}
 				/>
 			}
-			onHide={() => handleHideModalProducts()}
+			onHide={handleHideModalProducts}
 		>
 			<DataTable
 				value={products}
@@ -35,7 +36,7 @@ const SelectProductsModal = ({
 				responsiveLayout='scroll'
 				selection={selectedProducts}
 				globalFilter={globalFilter}
-				onSelectionChange={evt => setSelectedProducts(evt.value)}
+				onSelectionChange={evt => handleAddSelectedProducts(evt)}
 				header={<HeaderSelectProducts setGlobalFilter={setGlobalFilter} />}
 			>
 				<Column selectionMode='multiple'></Column>

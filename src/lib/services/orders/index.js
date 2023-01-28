@@ -1,18 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosPrivate } from '../../api/Axios';
-import { productsCartMapper } from '../../mappers/products/products-cart.mapper';
-import { productsMapper } from '../../mappers/products/products.mapper';
 
-export const getProducts = createAsyncThunk(
-	'products/all',
+export const getOrders = createAsyncThunk(
+	'orders/all',
 	async (_, { rejectWithValue }) => {
 		try {
-			const response = await axiosPrivate.get('products');
+			const response = await axiosPrivate.get('orders');
 			const data = [...response.data.data];
 
-			let products = data.map(product => productsMapper(product));
+			//let Orders = data.map(product => OrdersMapper(product));
 
-			return products;
+			return data;
 		} catch (error) {
 			let message;
 			switch (error.status) {
@@ -31,16 +29,16 @@ export const getProducts = createAsyncThunk(
 	}
 );
 
-export const getSelectProducts = createAsyncThunk(
-	'products/select',
+export const getSelectOrders = createAsyncThunk(
+	'orders/select',
 	async (_, { rejectWithValue }) => {
 		try {
-			const response = await axiosPrivate.get('products');
+			const response = await axiosPrivate.get('orders');
 			const data = [...response.data.data];
 
-			let products = data.map(product => selecProductsMapper(product));
+			//let Orders = data.map(product => selecOrdersMapper(product));
 
-			return products;
+			return data;
 		} catch (error) {
 			let message;
 			switch (error.status) {
@@ -59,16 +57,16 @@ export const getSelectProducts = createAsyncThunk(
 	}
 );
 
-export const getCartProducts = createAsyncThunk(
-	'products/cart',
+export const getCartOrders = createAsyncThunk(
+	'orders/cart',
 	async (_, { rejectWithValue }) => {
 		try {
-			const response = await axiosPrivate.get('products');
+			const response = await axiosPrivate.get('orders');
 			const data = [...response.data.data];
 
-			let products = data.map(product => productsCartMapper(product));
+			//let Orders = data.map(product => OrdersCartMapper(product));
 
-			return products;
+			return data;
 		} catch (error) {
 			let message;
 			switch (error.status) {
@@ -87,18 +85,18 @@ export const getCartProducts = createAsyncThunk(
 	}
 );
 
-export const createProduct = createAsyncThunk(
-	'products/createProduct',
-	async ({ createdProductData, navigate, toast }, { rejectWithValue }) => {
+export const createOrder = createAsyncThunk(
+	'orders/creatOrder',
+	async ({ createdOrderData, navigate, toast }, { rejectWithValue }) => {
 		try {
 			const response = await axiosPrivate.post(
-				'products',
-				createdProductData
+				'orders',
+				createdOrderData
 			);
 			if (response.data.ok) {
-				toast.success('Producto agregado exitosamente');
+				toast.success('Orden agregada exitosamente');
 
-				navigate('/admin/productos', { replace: true });
+				navigate('/ventas', { replace: true });
 
 				return response.data;
 			}
@@ -123,19 +121,19 @@ export const createProduct = createAsyncThunk(
 	}
 );
 
-export const updateProduct = createAsyncThunk(
-	'products/updateProduct',
-	async ({ id, updatedProductData, toast, navigate }, { rejectWithValue }) => {
+export const updateOrder = createAsyncThunk(
+	'orders/updateOrder',
+	async ({ id, updatedOrderData, toast, navigate }, { rejectWithValue }) => {
 		try {
 			const response = await axiosPrivate.put(
-				`products/${id}`,
-				updatedProductData
+				`orders/${id}`,
+				updatedOrderData
 			);
 
 			if (response.data.ok) {
-				toast.success('Producto actualizado exitosamente');
+				toast.success('Orden actualizada exitosamente');
 
-				navigate('/admin/productos', { replace: true });
+				navigate('/ventas', { replace: true });
 
 				return response.data.data;
 			}
@@ -160,14 +158,14 @@ export const updateProduct = createAsyncThunk(
 	}
 );
 
-export const deleteProduct = createAsyncThunk(
-	'products/deleteProduct',
+export const deleteOrder = createAsyncThunk(
+	'orders/deleteOrder',
 	async ({ id, toast }, { rejectWithValue }) => {
 		try {
-			const response = await axiosPrivate.delete(`products/${id}`);
+			const response = await axiosPrivate.delete(`orders/${id}`);
 
 			if (response.data.ok) {
-				toast.success('Producto eliminado exitosamente');
+				toast.success('Orden eliminada exitosamente');
 
 				return response.data;
 			}

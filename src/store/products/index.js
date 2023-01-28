@@ -4,6 +4,7 @@ import {
 	deleteProduct,
 	getProducts,
 	getSelectProducts,
+	getCartProducts,
 	updateProduct
 } from '../../lib/services/products';
 
@@ -11,6 +12,7 @@ const initialState = {
 	currentProduct: {},
 	products: [],
 	selectProducts: [],
+	cartProducts: [],
 	error: '',
 	loading: false
 };
@@ -49,6 +51,14 @@ const productSlice = createSlice({
 				state.selectProducts = [...action.payload];
 			})
 			.addCase(getSelectProducts.rejected, (state, action) => {
+				state.loading = false;
+				state.error = action.payload.message;
+			})
+			.addCase(getCartProducts.fulfilled, (state, action) => {
+				state.loading = false;
+				state.cartProducts = [...action.payload];
+			})
+			.addCase(getCartProducts.rejected, (state, action) => {
 				state.loading = false;
 				state.error = action.payload.message;
 			})

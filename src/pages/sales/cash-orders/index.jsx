@@ -2,6 +2,8 @@ import { Button } from 'primereact/button';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
 import { Splitter, SplitterPanel } from 'primereact/splitter';
+import TotalsOrder from './components/TotalsOrder';
+
 import SelectProductsModal from './components/SelectProductsModal';
 import useProductsModal from './hooks/useProductsModal';
 
@@ -9,9 +11,9 @@ const CashOrders = () => {
 	const {
 		handleOpenModalProducts,
 		handleHideModalProducts,
-		modalProducts,
+		visibleModalProducts,
 		selectedProducts,
-		setSelectedProducts,
+		handleAddSelectedProducts,
 		globalFilter,
 		setGlobalFilter,
 		removeProduct,
@@ -22,16 +24,13 @@ const CashOrders = () => {
 		<>
 			<header className='flex items-center gap-2 ml-4 my-2'>
 				<h3 className='font-bold'>Seleccionar productos</h3>
-				<Button
-					icon='pi pi-cart-plus'
-					onClick={() => handleOpenModalProducts()}
-				/>
+				<Button icon='pi pi-cart-plus' onClick={handleOpenModalProducts} />
 			</header>
 			<SelectProductsModal
-				modalProducts={modalProducts}
+				visibleModalProducts={visibleModalProducts}
 				handleHideModalProducts={handleHideModalProducts}
 				selectedProducts={selectedProducts}
-				setSelectedProducts={setSelectedProducts}
+				handleAddSelectedProducts={handleAddSelectedProducts}
 				globalFilter={globalFilter}
 				setGlobalFilter={setGlobalFilter}
 			/>
@@ -45,13 +44,12 @@ const CashOrders = () => {
 						<Column field='price1' header='Precio' />
 						<Column field='inStock' header='Stock' />
 						<Column body={handleQuantityProduct} header='Cantidad' />
+						<Column field='subtotal' header='Total' />
 						<Column body={removeProduct} header='Eliminar' />
 					</DataTable>
 				</SplitterPanel>
 				<SplitterPanel className='flex items-center justify-center'>
-					<div>
-						<h4>TOTAL DE VENTA</h4>
-					</div>
+					<TotalsOrder />
 				</SplitterPanel>
 			</Splitter>
 		</>

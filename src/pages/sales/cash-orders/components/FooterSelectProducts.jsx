@@ -6,13 +6,13 @@ const FooterSelectProducts = ({ handleHideModalProducts }) => {
 			<Button
 				label='Cerrar'
 				icon='pi pi-times'
-				onClick={() => handleHideModalProducts()}
+				onClick={handleHideModalProducts}
 				className='p-button-text'
 			/>
 			<Button
 				label='Aceptar'
 				icon='pi pi-check'
-				onClick={() => handleHideModalProducts()}
+				onClick={handleHideModalProducts}
 				autoFocus
 			/>
 		</div>
