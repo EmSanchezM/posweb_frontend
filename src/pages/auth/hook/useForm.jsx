@@ -57,7 +57,7 @@ const useFormLogin = () => {
 				
 				dispatch(getAuthenticatedUser());
 
-				if (user.rol === 'Admin') navigate(from, { replace: true });
+				if (user.rol === 'Admin') navigate('admin', { replace: true });
 
 				if (user.rol === 'Cajero') navigate('ventas/caja', { replace: true });
 
