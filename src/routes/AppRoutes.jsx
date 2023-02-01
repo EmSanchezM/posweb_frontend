@@ -1,4 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
+import { ErrorBoundary } from '../components/commons/Errors/ErrorBoundary';
 
 import AdminLayout from '../components/layouts/AdminLayout';
 import Layout from '../components/layouts/Layout';
@@ -23,31 +24,10 @@ import SupplierForm from '../pages/Suppliers/form';
 import Users from '../pages/Users';
 import UserForm from '../pages/Users/form';
 
-/*
-TODO: LAZY COMPONENT
-const Layout = lazy(() => import('../components/layouts/Layout'));
-const AdminLayout = lazy(() => import('../components/layouts/AdminLayout'));
-
-const Login = lazy(() => import('../pages/auth'));
-const Categories = lazy(() => import('../pages/Categories'));
-const CategoryForm = lazy(() => import('../pages/Categories/form'));
-const Customers = lazy(() => import('../pages/Customers'));
-const CustomerForm = lazy(() => import('../pages/Customers/form'));
-const Misssing = lazy(() => import('../pages/Missing'));
-const Products = lazy(() => import('../pages/Products'));
-const ProductsForm = lazy(() => import('../pages/Products/form'));
-const CashOrders = lazy(() => import('../pages/sales/cash-orders'));
-const TableOrders = lazy(() => import('../pages/sales/table-orders'));
-const WebOrders = lazy(() => import('../pages/sales/web-orders'));
-const Suppliers = lazy(() => import('../pages/Suppliers'));
-const SupplierForm = lazy(() => import('../pages/Suppliers/form'));
-const Users = lazy(() => import('../pages/Users'));
-const UserForm = lazy(() => import('../pages/Users/form'));
-*/
-
 export const router = createBrowserRouter([{
 	path: '/',
 	element: <Layout />,
+	errorElement: <ErrorBoundary />,
 	children: [
 		{
 			index: true,
