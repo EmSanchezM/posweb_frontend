@@ -4,6 +4,7 @@ import Navbar from '../navigation/Navbar';
 import SidebarPos from '../navigation/Sidebar';
 
 const AdminLayout = () => {
+	
 	return (
 		<SidebarProvider>
 			<SidebarPos />

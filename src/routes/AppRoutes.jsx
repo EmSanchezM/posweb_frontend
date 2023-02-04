@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, redirect } from 'react-router-dom';
 import { ErrorBoundary } from '../components/commons/Errors/ErrorBoundary';
 
 import AdminLayout from '../components/layouts/AdminLayout';
@@ -7,6 +7,7 @@ import Layout from '../components/layouts/Layout';
 import PrivateRoute from '../components/routing/PrivateRoute/PrivateRoute';
 
 import { ROLES } from '../lib/constants/roles';
+import useAuth from '../lib/hooks/auth/useAuth';
 
 import Login from '../pages/auth';
 import Categories from '../pages/Categories';
@@ -37,7 +38,10 @@ export const router = createBrowserRouter([{
 			path: 'admin',
 			element: <PrivateRoute allowedRoles={[ROLES.ADMIN]} />,
 			children: [
-				{ index: true, element: <AdminLayout /> },
+				{ 
+					index: true, 
+					element: <AdminLayout />,
+				},
 				{ path: 'usuarios', element: <Users /> },
 				{ path: 'usuarios/:action', element: <UserForm /> },
 				{ path: 'clientes', element: <Customers /> },

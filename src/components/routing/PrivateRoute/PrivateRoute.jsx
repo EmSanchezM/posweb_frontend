@@ -5,11 +5,7 @@ const PrivateRoute = ({ allowedRoles }) => {
 	const { auth } = useAuth();
 	const location = useLocation();
 
-	return allowedRoles?.includes(auth?.user?.rol) ? (
-		<Outlet />
-	) : (
-		<Navigate to='/' state={{ from: location }} />
-	);
+	return allowedRoles?.includes(auth?.user?.rol) ? <Outlet /> : <Navigate to='/' state={{ from: location }} replace />
 };
 
 export default PrivateRoute;
