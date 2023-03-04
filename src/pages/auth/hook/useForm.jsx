@@ -17,7 +17,7 @@ const useFormLogin = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const dispatch = useDispatch();
-	const from = location.state?.from?.pathname || '/admin';
+	let from = location.state?.from?.pathname || '/admin';
 
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -57,25 +57,39 @@ const useFormLogin = () => {
 				
 				dispatch(getAuthenticatedUser());
 
-				if (user.rol === 'Admin') navigate(from, { replace: true });
+				if (user.rol === 'Admin') {
+					from = location.state?.from?.pathname || '/admin';
+					navigate(from, { replace: true })
+				};
 
-				if (user.rol === 'Cajero') navigate('ventas/caja', { replace: true });
+				if (user.rol === 'Cajero') { 
+					from = location.state?.from?.pathname || '/ventas/caja';
+					navigate(from, { replace: true })
+				}
 
-				if (user.rol === 'Mesero') navigate('ventas/pedidos-mesa', { replace: true });
+				if (user.rol === 'Mesero') {
+					from = location.state?.from?.pathname || '/ventas/pedidos-mesa';
+					navigate(from, { replace: true });
+				}
 			}
 		} catch (error) {
 			let messageError;
-
-			switch (error.response.status) {
-				case 500:
-					messageError = 'Internal Server Error';
-					break;
-				case 401:
-					messageError = 'Credenciales no validas';
-					break;
-				default:
-					messageError = error.response.data.message;
+			
+			if(error.response) {
+				switch (error.response.status) {
+					case 500:
+						messageError = 'Internal Server Error';
+						break;
+					case 401:
+						messageError = 'Credenciales no validas';
+						break;
+					default:
+						messageError = error.response.data.message;
+				}
+			} else {
+				messageError = error.message
 			}
+
 			setIsLoading(false);
 			setErrorMessage({
 				error: true,
