@@ -1,11 +1,13 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import useAuth from '../../../lib/hooks/auth/useAuth';
 
-const PrivateRoute = ({ allowedRoles }) => {
+const PrivateRoute = ({ allowedRoles, children }) => {
 	const { auth } = useAuth();
 	const location = useLocation();
 
-	return allowedRoles?.includes(auth?.user?.rol) ? <Outlet /> : <Navigate to='/' state={{ from: location }} replace />
+	if(!allowedRoles?.includes(auth?.user?.rol)) return <Navigate to='/' state={{ from: location }} replace />
+
+	return children ? children : <Outlet />;
 };
 
 export default PrivateRoute;

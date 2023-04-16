@@ -7,6 +7,7 @@ export const getCustomers = createAsyncThunk(
 	async (_, { rejectWithValue }) => {
 		try {
 			const response = await axiosPrivate.get('customers');
+			
 			const data = [...response.data.data];
 
 			let customers = data.map(customer => customersMapper(customer));

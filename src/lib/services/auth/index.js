@@ -75,6 +75,8 @@ export const logout = createAsyncThunk(
 		try {
 			const response = await axiosPrivate.post('auth/logout');
 
+			localStorage.clear('jwt');
+
 			if (response.data.ok) {
 				navigate('/');
 				return response.data;

@@ -7,7 +7,6 @@ import Layout from '../components/layouts/Layout';
 import PrivateRoute from '../components/routing/PrivateRoute/PrivateRoute';
 
 import { ROLES } from '../lib/constants/roles';
-import useAuth from '../lib/hooks/auth/useAuth';
 
 import Login from '../pages/auth';
 import Categories from '../pages/Categories';
@@ -36,11 +35,12 @@ export const router = createBrowserRouter([{
 		},
 		{
 			path: 'admin',
-			element: <PrivateRoute allowedRoles={[ROLES.ADMIN]} />,
+			element: (<PrivateRoute allowedRoles={[ROLES.ADMIN]}><AdminLayout /></PrivateRoute>),
+			errorElement: <ErrorBoundary />,
 			children: [
 				{ 
 					index: true, 
-					element: <AdminLayout />,
+					element: <Users />,
 				},
 				{ path: 'usuarios', element: <Users /> },
 				{ path: 'usuarios/:action', element: <UserForm /> },
@@ -56,9 +56,9 @@ export const router = createBrowserRouter([{
 		},
 		{
 			path: 'ventas',
-			element: <PrivateRoute allowedRoles={[ROLES.MESERO, ROLES.CAJERO]} />,
+			element: (<PrivateRoute allowedRoles={[ROLES.MESERO, ROLES.CAJERO]}><AdminLayout /></PrivateRoute>),
 			children: [
-				{ index: true, element: <AdminLayout /> },
+				{ index: true, element: <CashOrders /> },
 				{ path: 'caja', element: <CashOrders /> },
 				{ path: 'pedidos-web', element: <WebOrders /> },
 				{ path: 'pedidos-mesa', element: <TableOrders /> },

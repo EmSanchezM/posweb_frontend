@@ -5,24 +5,32 @@ import axios from 'axios';
 
 //const BASE_URL = 'https://api.dataplushn.com/api';
 //const BASE_URL = 'http://back.dataplushn.com/api';
-const BASE_URL = 'https://poswebbackend-production.up.railway.app/api';
-//const BASE_URL = 'http://localhost:1338/api';
+//const BASE_URL = 'https://poswebbackend-production.up.railway.app/api';
+const BASE_URL = 'http://localhost:1337/api';
 
 export default axios.create({
     baseURL: BASE_URL, //'https://poswebbackend-dataplus.up.railway.app/api/',
     headers: {
-        'Content-Type': 'application/json'
-            /* 'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE' */
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
     }
 });
 
 export const axiosPrivate = axios.create({
     baseURL: BASE_URL, //'https://poswebbackend-dataplus.up.railway.app/api/',
     headers: {
-        'Content-Type': 'application/json'
-            /* 'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET,POST,PUT,PATCH,DELETE' */
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
     },
-    withCredentials: '*'
 });
+
+axiosPrivate.interceptors.request.use((config) => {
+    const token = localStorage.getItem('jwt')
+        ? localStorage.getItem('jwt')
+        : null 
+    
+    config.headers['Authorization'] = `jwt=${token}`
+
+    return config 
+})
+

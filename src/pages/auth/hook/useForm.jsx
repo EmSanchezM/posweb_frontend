@@ -43,11 +43,11 @@ const useFormLogin = () => {
 		try {
 			const { data } = await axios.post(
 				'auth/login',
-				{ username, password },
-				{ withCredentials: true }
+				{ username, password }
 			);
 
 			if (data.ok) {
+				
 				const { user, accessToken } = data;
 				setAuth({
 					user,
